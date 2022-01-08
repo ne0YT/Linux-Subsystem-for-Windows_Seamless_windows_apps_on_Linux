@@ -10,3 +10,16 @@ I tested this using Xubuntu & Kubuntu 20.04
 For Games I still use Steams Proton. But for Business apps which don't work on the first try with wine or mono I just use this setup.
 
 because it's a very small VM (Install size without software is about 2.8 GB (64bit W10)) you can just synch/move it between your Linux Computers without any additional setup or special wine config!
+
+Requirement:
+Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with no password.
++ Enable no password in GPO
+
+Setup:
+Just run this in a terminal:
+```
+git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux
+cd Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux/
+./install_LSW.sh
+```
+
