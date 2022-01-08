@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Windows
+Comment=
+Exec=bash windows.sh %f
+Icon=virt-manager
+Path=
+Terminal=false
+StartupNotify=false
+Categories=System
