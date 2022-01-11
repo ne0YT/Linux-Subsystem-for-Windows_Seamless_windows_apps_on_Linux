@@ -33,7 +33,7 @@ cd ~/.tmp
 touch tmpfile
 chmod +x tmpfile
 # CHANGE windows username (no password!)
-echo 'VBoxManage --nologo guestcontrol "win10" run --username admin --wait-stdout --exe "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -- powershell/arg0 "'Z:\\$1'"' >> tmpfile
+echo 'VBoxManage --nologo guestcontrol "win10" run --username admin --password RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn --wait-stdout --exe "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -- powershell/arg0 "'Z:\\$1'"' >> tmpfile
 
 #
 # Run the commands in tmpfile for opening the clicked file!
