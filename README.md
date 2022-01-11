@@ -23,7 +23,7 @@ Just run this in a terminal:
 ```
 git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux
 cd Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux/
-./install_LSW.sh
+sudo bash ./install_LSW.sh
 ```
 
 **Demo:**
