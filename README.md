@@ -31,4 +31,4 @@ sudo bash ./install_LSW.sh
 
 **SaveWindows -App:**
 If you set this up as I did there's not to much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".. but still..
-This App saves the state of the win10-VM so you can temporarily use your full performance on Linux
+This App saves the state of the win10-VM so you can temporarily use your full performance on Linux.
