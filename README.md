@@ -2,7 +2,7 @@
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest..
 
-it works very well using tiny10 from NTDEV
+this works very well using tiny10 from NTDEV.. (very small windows-install)
 
 no need to worry anmyore that "this one Tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app.. and this without much resources wasted or a complicated setup! Also thanks to snapshots you can easily revert any changes and startup the VM after a reboot extremely quickly!
 
