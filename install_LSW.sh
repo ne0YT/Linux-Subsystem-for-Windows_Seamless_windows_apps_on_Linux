@@ -9,3 +9,7 @@ fi
 chmod +x /usr/bin/windows.sh
 \cp ./Windows.desktop /usr/share/applications/
 chmod +x /usr/share/applications/Windows.desktop
+\cp ./savewindows.sh /usr/bin/
+chmod +x /usr/bin/savewindows.sh
+\cp ./SaveWindows.desktop /usr/share/applications/
+chmod +x /usr/share/applications/SaveWindows.desktop

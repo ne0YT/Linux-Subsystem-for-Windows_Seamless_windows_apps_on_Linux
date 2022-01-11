@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SaveWindows
+Comment=
+Exec=bash savewindows.sh
+Icon=virt-manager
+Path=
+Terminal=false
+StartupNotify=false
+Categories=System
