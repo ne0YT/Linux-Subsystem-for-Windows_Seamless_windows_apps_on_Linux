@@ -13,7 +13,7 @@ For Games I still use Steams Proton. But for Business apps I just use this setup
 because it's a very **small VM** (Install size without software is about **2.8 GB (64bit W10)**) you can just synch/move it between your Linux Computers without any additional setup or special config!
 
 **Requirement:**
-Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the password:
+Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with autologin and the password:
 ```
 RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
 ```
