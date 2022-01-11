@@ -2,6 +2,9 @@
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest..
 
+**Demo:**
+https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
+
 this works very well using tiny10 from NTDEV.. (very small windows-install)
 
 no need to worry anmyore that "this one Tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app.. and this without much resources wasted or a complicated setup! Also thanks to snapshots you can easily revert any changes and startup the VM after a reboot extremely quickly!
@@ -26,5 +29,6 @@ cd Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux/
 sudo bash ./install_LSW.sh
 ```
 
-**Demo:**
-https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
+**SaveWindows -App:**
+If you set this up as I did there's not to much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".. but still..
+This App saves the state of the win10-VM so you can temporarily use your full performance on Linux
