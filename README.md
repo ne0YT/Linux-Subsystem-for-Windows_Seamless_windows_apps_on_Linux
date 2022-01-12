@@ -20,6 +20,8 @@ Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the pa
 ```
 RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
 ```
+Additional Tip (true seamlessness):
+Add to the startup-folder (win+r shell:startup) the attached "disable_taskbar.cmd"
 
 **Setup:**
 Just run this in a terminal:
