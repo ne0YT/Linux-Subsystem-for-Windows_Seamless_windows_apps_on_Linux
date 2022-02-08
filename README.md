@@ -28,7 +28,7 @@ Name:
 ROOT
 + Tick "Auto-Mount"
 ```
-this will create the Z:-Drive in Windows automatically! otherwise there's an issue with the guest-tools.
+this will create the "Z:" Drive in Windows automatically! otherwise there's an issue with the guest-tools.
 
 Additional Tip (true seamlessness):
 Add to the startup-folder (win+r shell:startup) the attached **"disable_taskbar.cmd"**
