@@ -5,7 +5,7 @@
 **Demo:**
 https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
-this works very well using tiny10 from NTDEV.. (very small windows-install)
+this works very well using tiny10 from NTDEV.. or Superlite compact versions (very small windows-install some have more some have less features..)
 
 no need to worry anmyore that "this one Tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app.. and this without much resources wasted or a complicated setup! Also thanks to snapshots you can easily revert any changes and startup the VM after a reboot extremely quickly!
 
@@ -13,13 +13,23 @@ I tested this using Xubuntu & Kubuntu 20.04 but it should work on any -nix-Syste
 
 For Games I still use Steams Proton. But for Business apps I just use this setup.
 
-because it's a very **small VM** (Install size without software is about **2.8 GB (64bit W10)**) you can just synch/move it between your Linux Computers without any additional setup or special config!
+because it's a very **small VM** (Install size without software is about **2.8 GB (64bit W10 "tiny10")**) you can just synch/move it between your Linux Computers without any additional setup or special config!
 
 **Requirement:**
 Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the password:
 ```
 RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
 ```
+The VM needs to have guest-tools installed and you need to add the shared folder like this:
+```
+Path:
+\
+Name:
+ROOT
++ Tick "Auto-Mount"
+```
+this will create the Z:-Drive in Windows automatically! otherwise there's an issue with the guest-tools.
+
 Additional Tip (true seamlessness):
 Add to the startup-folder (win+r shell:startup) the attached **"disable_taskbar.cmd"**
 
