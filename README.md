@@ -5,8 +5,8 @@
 **Demo:**
 https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
-This works very well using tiny10 from NTDEV or the Superlite compact version of Windows. 
-Those very small Windows installation, who have some features stripped.
+This works very well using "tiny10" from NTDEV or the "Superlite compact" version of Windows. 
+These very small Windows installations that have removed some features.
 
 No need to worry anymore that "this one tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app… and this without many resources wasted or a complicated setup! Also, thanks to snapshots, you can easily revert any changes and startup the VM after a reboot extremely quickly!
 
