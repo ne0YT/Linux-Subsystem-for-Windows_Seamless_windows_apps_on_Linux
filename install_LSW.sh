@@ -13,3 +13,6 @@ chmod +x /usr/share/applications/Windows.desktop
 chmod +x /usr/bin/savewindows.sh
 \cp ./SaveWindows.desktop /usr/share/applications/
 chmod +x /usr/share/applications/SaveWindows.desktop
+
+# Update Apps without logout
+update-desktop-database /usr/share/applications/
