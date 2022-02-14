@@ -8,4 +8,4 @@ Icon=virt-manager
 Path=
 Terminal=false
 StartupNotify=false
-Categories=System
+Categories=Utility
