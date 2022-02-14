@@ -47,5 +47,8 @@ sudo bash ./install_LSW.sh
 If you set this up as I did, there's not too much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".
 In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the win10-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
 
+**powershell.exe.lnk:**
+Launch Powershell (need to be opened "using Windows")
+
 **uninstall_LSW.sh:**
 If you want to remove this great Tool.. just run "uninstall_LSW.sh"
