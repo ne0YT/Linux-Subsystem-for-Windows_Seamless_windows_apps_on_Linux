@@ -25,7 +25,7 @@ fi
 
 #
 # Make a new executable file having WINDOWS_PATH as argument at the end of
-# VBoxManage command and write the command sting in it.
+# VBoxManage command and write the command string in it.
 #
 mkdir ~/.tmp > /dev/null 2>&1
 cd ~/.tmp
