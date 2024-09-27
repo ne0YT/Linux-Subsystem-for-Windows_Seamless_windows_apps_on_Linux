@@ -19,9 +19,12 @@ fi
 # CHANGE "win10" to your VM name
 if !( vboxmanage showvminfo "win10" | grep -c "running (since" ); then
     vboxmanage startvm "win10" --type separate > /dev/null
-    sleep 10 # change this if you Windows is loading faster
+    sleep 10 # change this if your Windows is loading faster
     #echo "start"
 fi
+
+VBoxManage --nologo guestcontrol "win10" run --username admin --password RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn \
+--wait-stdout --exe "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -- "net use z: \\\\vboxsvr\\ROOT"
 
 #
 # Make a new executable file having WINDOWS_PATH as argument at the end of

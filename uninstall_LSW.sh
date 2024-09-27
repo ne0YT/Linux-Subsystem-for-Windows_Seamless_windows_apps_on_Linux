@@ -11,3 +11,5 @@ rm -f /usr/bin/windows.sh
 rm -f  /usr/share/applications/Windows.desktop
 rm -f /usr/bin/savewindows.sh
 rm -f /usr/share/applications/SaveWindows.desktop
+rm -f /usr/bin/umountRoot.sh
+rm -f /usr/share/applications/UmountRoot.desktop
