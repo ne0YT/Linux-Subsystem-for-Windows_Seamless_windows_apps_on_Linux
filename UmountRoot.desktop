@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=UmountRoot
+Comment=Unmount root directory (if unused)
+Exec=bash umountRoot.sh
+Icon=virt-manager
+Path=
+Terminal=false
+StartupNotify=false
+Categories=System;

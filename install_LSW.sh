@@ -13,6 +13,10 @@ chmod +x /usr/share/applications/Windows.desktop
 chmod +x /usr/bin/savewindows.sh
 \cp ./SaveWindows.desktop /usr/share/applications/
 chmod +x /usr/share/applications/SaveWindows.desktop
+\cp ./umountRoot.sh /usr/bin/
+chmod +x /usr/bin/umountRoot.sh
+\cp ./UmountRoot.desktop /usr/share/applications/
+chmod +x /usr/share/applications/UmountRoot.desktop
 
 # Update Apps without logout
 update-desktop-database /usr/share/applications/

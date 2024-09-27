@@ -5,7 +5,7 @@
 **Demo:**
 https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
-This works very well using "tiny10" from NTDEV or the "Superlite compact" version of Windows. 
+This works very well using "tiny10" from NTDEV or the "Superlite compact" version of Windows.
 These very small Windows installations that have removed some features.
 
 No need to worry anymore that "this one tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app… and this without many resources wasted or a complicated setup! Also, thanks to snapshots, you can easily revert any changes and startup the VM after a reboot extremely quickly!
@@ -30,6 +30,7 @@ ROOT
 + Tick "Auto-Mount"
 ```
 This will create the "Z:" Drive in Windows automatically! Otherwise, there's an issue with the guest tools.
+But if you are worried about permanently mounting the root of the host Linux system in Windows in read/write mode because of security reasons, you can uncheck this box later (see “umountRoot” section).
 
 Additional tip (for true "seamlessness"):
 Add the attached **"disable_taskbar.cmd"** to the startup-folder.
@@ -46,6 +47,10 @@ sudo bash ./install_LSW.sh
 **SaveWindows -App:**
 If you set this up as I did, there's not too much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".
 In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the win10-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
+
+**umountRoot**
+Since giving Windows read/write access to the root of the host Linux system is not secure, or if you are paranoid about Windows tracking, you can pause mounting the root of the host system.
+It will then be mounted again the next time you run any file using "run with Windows-File".
 
 **powershell.exe.lnk:**
 Launch Powershell (need to be opened "using Windows")
