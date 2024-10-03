@@ -2,8 +2,7 @@
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest...
 
-**Demo:**
-https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
+**Demo:** https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
 This works very well using "tiny10" from NTDEV or the "Superlite compact" version of Windows.
 These very small Windows installations that have removed some features.
@@ -14,9 +13,10 @@ I tested this using Xubuntu & Kubuntu 20.04, but it should work on any -nix-Syst
 
 For games, I still use Steams Proton. But for Business apps, I just use this setup.
 
-Because it's a very **small VM** (Install size without software is about **2.8 GB (64bit W10 "tiny10")**) you can just synch/move it between your Linux Computers without any additional setup or special config!
+Because it's a very **small VM** (iso install size without software is about **3.7 GB ("tiny10 23h1 x64")**) you can just synch/move it between your Linux Computers without any additional setup or special config!
 
 **Requirement:**
+
 Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the password:
 ```
 RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
@@ -30,13 +30,19 @@ ROOT
 + Tick "Auto-Mount"
 ```
 This will create the "Z:" Drive in Windows automatically! Otherwise, there's an issue with the guest tools.
-But if you are worried about permanently mounting the root of the host Linux system in Windows in read/write mode because of security reasons, you can uncheck this box later (see “umountRoot” section).
 
-Additional tip (for true "seamlessness"):
-Add the attached **"disable_taskbar.cmd"** to the startup-folder.
+If you are worried about permanently mounting the root of the host Linux system in Windows in read/write mode because of security reasons, you can pause root folder mounting later (see **umountRoot** section for details).
+
+Additional tips for tuning VM-interacting experience (for true "seamlessness"):
+1. Add the attached **"disable_taskbar.cmd"** to the startup-folder.
 Press Win+R and then type: ```shell:startup```
+2. Configure the VM to automatically shut down when you click the close button in the virtual machine window decorator instead of asking what you want to do.
+    - Run from Linux host terminal: ```VBoxManage setextradata 'win10' GUI/DefaultCloseAction Shutdown```.
+    - In Windows 10 VM go to Control Panel -> Power Options -> System settings -> When I press the power button -> Choose "Shut down".
+    - Reboot (for applying VBox setting).
 
 **Setup:**
+
 Just run this in a terminal:
 ```
 git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux
@@ -45,15 +51,19 @@ sudo bash ./install_LSW.sh
 ```
 
 **SaveWindows -App:**
+
 If you set this up as I did, there's not too much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".
 In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the win10-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
 
-**umountRoot**
-Since giving Windows read/write access to the root of the host Linux system is not secure, or if you are paranoid about Windows tracking, you can pause mounting the root of the host system.
+**umountRoot:**
+
+Since giving Windows read/write access to the root of the host Linux system is not secure, or if you are paranoid about Windows tracking, you can pause mounting the root of the host system. To do this, run ```umountRoot``` from your DE menu.
 It will then be mounted again the next time you run any file using "run with Windows-File".
 
 **powershell.exe.lnk:**
+
 Launch Powershell (need to be opened "using Windows")
 
 **uninstall_LSW.sh:**
-If you want to remove this great Tool.. just run "uninstall_LSW.sh"
+
+If you want to remove this great Tool.. just run ```uninstall_LSW.sh```
