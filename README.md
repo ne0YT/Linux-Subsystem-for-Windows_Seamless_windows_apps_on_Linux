@@ -2,8 +2,7 @@
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest...
 
-**Demo:**
-https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
+**Demo:** https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
 This works very well using "tiny10" from NTDEV or the "Superlite compact" version of Windows.
 These very small Windows installations that have removed some features.
@@ -17,6 +16,7 @@ For games, I still use Steams Proton. But for Business apps, I just use this set
 Because it's a very **small VM** (iso install size without software is about **3.7 GB ("tiny10 23h1 x64")**) you can just synch/move it between your Linux Computers without any additional setup or special config!
 
 **Requirement:**
+
 Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the password:
 ```
 RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
@@ -42,6 +42,7 @@ Press Win+R and then type: ```shell:startup```
     - Reboot (for applying VBox setting).
 
 **Setup:**
+
 Just run this in a terminal:
 ```
 git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux
@@ -50,15 +51,19 @@ sudo bash ./install_LSW.sh
 ```
 
 **SaveWindows -App:**
+
 If you set this up as I did, there's not too much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".
 In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the win10-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
 
-**umountRoot**
-Since giving Windows read/write access to the root of the host Linux system is not secure, or if you are paranoid about Windows tracking, you can pause mounting the root of the host system. To do this, run "umountRoot" from your DE menu.
+**umountRoot:**
+
+Since giving Windows read/write access to the root of the host Linux system is not secure, or if you are paranoid about Windows tracking, you can pause mounting the root of the host system. To do this, run ```umountRoot``` from your DE menu.
 It will then be mounted again the next time you run any file using "run with Windows-File".
 
 **powershell.exe.lnk:**
+
 Launch Powershell (need to be opened "using Windows")
 
 **uninstall_LSW.sh:**
-If you want to remove this great Tool.. just run "uninstall_LSW.sh"
+
+If you want to remove this great Tool.. just run ```uninstall_LSW.sh```
