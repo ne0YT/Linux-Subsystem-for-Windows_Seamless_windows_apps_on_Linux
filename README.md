@@ -9,7 +9,10 @@ These very small Windows installations that have removed some features.
 
 No need to worry anymore that "this one tool for work" doesn't run on your Linux Machine! Now it will, just like if it was a native app… and this without many resources wasted or a complicated setup! Also, thanks to snapshots, you can easily revert any changes and startup the VM after a reboot extremely quickly!
 
-I tested this using Xubuntu & Kubuntu 20.04, but it should work on any -nix-System
+I tested this using Xubuntu & Kubuntu 20.04, but it should work on any Linux system. The installation script automatically detects and supports:
+- Arch-based systems (CachyOS, Manjaro, etc.) - uses pacman
+- Debian-based systems (Ubuntu, etc.) - uses apt
+- Fedora-based systems - uses dnf
 
 For games, I still use Steams Proton. But for Business apps, I just use this setup.
 
@@ -23,15 +26,9 @@ Windows 11 VM on Virtualbox with the name "w11" and a user "admin" with a passwo
 Create a file named `vm_password.txt` in the project directory with your VM password on a single line. This file is excluded from version control for security (see `.gitignore`).
 
 **VM Configuration:**
-The VM needs to have guest-tools installed, and you need to add the shared folder like this:
-```
-Path:
-\
-Name:
-ROOT
-+ Tick "Auto-Mount"
-```
-This will create the "Z:" Drive in Windows automatically! Otherwise, there's an issue with the guest tools.
+The VM needs to have guest-tools installed. The shared folder will be automatically configured during installation, creating the "Z:" drive in Windows automatically.
+
+**Note:** If the VM is running during installation, a transient shared folder will be created (temporary). For a permanent shared folder, shut down the VM before running the installation script.
 
 If you are worried about permanently mounting the root of the host Linux system in Windows in read/write mode because of security reasons, you can pause root folder mounting later (see **umountRoot** section for details).
 
@@ -51,6 +48,22 @@ git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_
 cd Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux/
 sudo bash ./install_LSW.sh
 ```
+
+The installation script will automatically:
+- Install required dependencies (VirtualBox, wmctrl)
+- Configure the shared folder for your VM
+- Set up VM auto-shutdown behavior
+- Check for password file
+- Install desktop applications
+
+**VM Auto-Start:** The system automatically starts the VM when you open a file, whether it's powered off or in a saved state.
+
+**Testing:** Always use `./windows.sh README.md` to test the system. The script runs in ~0.3 seconds and exits immediately.
+
+**Seamless Mode:** The installation script configures seamless mode settings. To enable seamless mode:
+- Start the VM
+- Go to View -> Seamless Mode in VirtualBox
+- Or press Host+L to toggle seamless mode
 
 **SaveWindows -App:**
 
