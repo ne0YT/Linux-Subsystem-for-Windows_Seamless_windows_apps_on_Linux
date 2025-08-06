@@ -1,4 +1,4 @@
-# Run any Windows App seamlessly on Linux! Just click on the File and chose "open with Windows" or "Always open with Windows"!
+# Run any Windows App seamlessly on Linux! Just click on the File and choose "open with Windows" or "Always open with Windows"!
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest...
 
@@ -13,14 +13,16 @@ I tested this using Xubuntu & Kubuntu 20.04, but it should work on any -nix-Syst
 
 For games, I still use Steams Proton. But for Business apps, I just use this setup.
 
-Because it's a very **small VM** (iso install size without software is about **3.7 GB ("tiny10 23h1 x64")**) you can just synch/move it between your Linux Computers without any additional setup or special config!
+Because it's a very **small VM** (iso install size without software is about **3.7 GB ("tiny10 23h1 x64")**) you can just sync/move it between your Linux Computers without any additional setup or special config!
 
-**Requirement:**
+**Requirements:**
 
-Windows 10 VM on Virtualbox with the name "win10" and a user "admin" with the password:
-```
-RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn
-```
+Windows 11 VM on Virtualbox with the name "w11" and a user "admin" with a password stored in `vm_password.txt` file.
+
+**Password Setup:**
+Create a file named `vm_password.txt` in the project directory with your VM password on a single line. This file is excluded from version control for security (see `.gitignore`).
+
+**VM Configuration:**
 The VM needs to have guest-tools installed, and you need to add the shared folder like this:
 ```
 Path:
@@ -37,8 +39,8 @@ Additional tips for tuning VM-interacting experience (for true "seamlessness"):
 1. Add the attached **"disable_taskbar.cmd"** to the startup-folder.
 Press Win+R and then type: ```shell:startup```
 2. Configure the VM to automatically shut down when you click the close button in the virtual machine window decorator instead of asking what you want to do.
-    - Run from Linux host terminal: ```VBoxManage setextradata 'win10' GUI/DefaultCloseAction Shutdown```.
-    - In Windows 10 VM go to Control Panel -> Power Options -> System settings -> When I press the power button -> Choose "Shut down".
+    - Run from Linux host terminal: ```VBoxManage setextradata 'w11' GUI/DefaultCloseAction Shutdown```.
+    - In Windows 11 VM go to Control Panel -> Power Options -> System settings -> When I press the power button -> Choose "Shut down".
     - Reboot (for applying VBox setting).
 
 **Setup:**
@@ -53,7 +55,7 @@ sudo bash ./install_LSW.sh
 **SaveWindows -App:**
 
 If you set this up as I did, there's not too much overhead and the VM only restores/starts as soon as you open the first "run with Windows-File".
-In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the win10-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
+In addition to this, in order to improve performance further, the program ```SaveWindows``` saves the state of the w11-VM, and restarts it when needed, so you can temporarily use your full performance on Linux.
 
 **umountRoot:**
 

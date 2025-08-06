@@ -1,0 +1,10 @@
+# Password file - contains sensitive information
+vm_password.txt
+
+# Temporary files
+*.tmp
+tmpfile
+
+# System files
+.DS_Store
+Thumbs.db 

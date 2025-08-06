@@ -15,18 +15,27 @@ if [ ! -f "$1" ]; then
    exit
 fi
 
-#start Vm
-# CHANGE "win10" to your VM name
-if !( vboxmanage showvminfo "win10" | grep -c "running (since" ); then
-    vboxmanage startvm "win10" --type separate > /dev/null
+# Get password from file
+PASSWORD_FILE="$(dirname "$0")/vm_password.txt"
+if [ ! -f "$PASSWORD_FILE" ]; then
+    echo "Password file not found: $PASSWORD_FILE"
+    echo "Please create vm_password.txt with your VM password"
+    exit 1
+fi
+VM_PASSWORD=$(cat "$PASSWORD_FILE" | tr -d '\n\r')
+
+#start VM
+# CHANGE "w11" to your VM name
+if !( vboxmanage showvminfo "w11" | grep -c "running (since" ); then
+    vboxmanage startvm "w11" --type separate > /dev/null
     sleep 10 # change this if your Windows is loading faster
     #echo "start"
 fi
 
 # Move focus to VM instance window (works for me on Linux Mint XFCE, if not working for you, you can adapt other solutions for your DE: https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window)
-wmctrl -a win10
+wmctrl -a w11
 
-VBoxManage --nologo guestcontrol "win10" run --username admin --password RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn \
+VBoxManage --nologo guestcontrol "w11" run --username admin --password "$VM_PASSWORD" \
 --wait-stdout --exe "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -- "net use z: \\\\vboxsvr\\ROOT"
 
 #
@@ -38,8 +47,8 @@ cd ~/.tmp
 #rm tmpfile
 touch tmpfile
 chmod +x tmpfile
-# CHANGE windows username (no password!)
-cmd=(VBoxManage --nologo guestcontrol "win10" run --username admin --password RALFqxAbLDEdFfVdgXjPD2Yvk3uqjT4JG8V9yVhrkBAD8jpRjwh4dZmtMxpdHGAn \
+# CHANGE windows username (password from file)
+cmd=(VBoxManage --nologo guestcontrol "w11" run --username admin --password "$VM_PASSWORD" \
 --wait-stdout --exe 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' -- '"& \"Z:\\'${1}'\""')
 echo "${cmd[@]}" >> tmpfile
 
