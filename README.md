@@ -2,6 +2,14 @@
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest...
 
+---
+**Important: Global Usage and Password File**
+
+- If you want to use `windows.sh` globally (from anywhere), the installer will create a symlink in `/usr/bin` pointing to the script in your project directory. **Do not move or rename the project folder after installation unless you re-run the installer or recreate the symlink.**
+- The password file (`vm_password.txt`) is always read from the project directory, not from your current working directory.
+- If you move the project folder, you must re-run the installer to update the symlink.
+---
+
 **Demo:** https://www.youtube.com/watch?v=QweFIyhDcMY&t=100s
 
 This works very well using "tiny11" from NTDEV or the "Superlite compact" version of Windows.

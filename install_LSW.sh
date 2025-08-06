@@ -34,7 +34,8 @@ echo ""
 echo "Copying files and setting permissions..."
 
 # copying files + setting permissions
-\cp ./windows.sh /usr/bin/
+rm -f /usr/bin/windows.sh
+ln -s "$(pwd)/windows.sh" /usr/bin/windows.sh
 chmod +x /usr/bin/windows.sh
 \cp ./Windows.desktop /usr/share/applications/
 chmod +x /usr/share/applications/Windows.desktop

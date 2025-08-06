@@ -5,8 +5,9 @@ if [ "$#" -ne 1 ]; then
    exit 1
 fi
 
-# Always resolve password file relative to script location
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Always resolve password file relative to the real script location (even if symlinked)
+SCRIPT_PATH="$(readlink -f "$0")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 PASSWORD_FILE="$SCRIPT_DIR/vm_password.txt"
 if [ ! -f "$PASSWORD_FILE" ]; then
     echo "Password file not found: $PASSWORD_FILE"
