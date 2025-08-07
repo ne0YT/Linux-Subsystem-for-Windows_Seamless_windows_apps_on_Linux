@@ -37,7 +37,20 @@ echo "Copying files and setting permissions..."
 rm -f /usr/bin/windows.sh
 ln -s "$(pwd)/windows.sh" /usr/bin/windows.sh
 chmod +x /usr/bin/windows.sh
-\cp ./Windows.desktop /usr/share/applications/
+# Always create a fresh Windows.desktop with correct Exec line
+cat > /usr/share/applications/Windows.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Windows
+Comment=Open with Windows VM
+Exec=/usr/bin/windows.sh %f
+Icon=virt-manager
+Path=
+Terminal=false
+StartupNotify=false
+Categories=Utility
+EOF
 chmod +x /usr/share/applications/Windows.desktop
 \cp ./savewindows.sh /usr/bin/
 chmod +x /usr/bin/savewindows.sh
