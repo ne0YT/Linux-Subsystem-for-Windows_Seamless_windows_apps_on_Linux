@@ -92,3 +92,12 @@ Launch Powershell (need to be opened "using Windows")
 **uninstall_LSW.sh:**
 
 If you want to remove this great Tool.. just run ```uninstall_LSW.sh```
+
+## Powershell Launchers
+
+After installation, you will have two new launchers available from your applications menu:
+
+- **Powershell in Windows**: Opens a standard Powershell session inside your Windows VM.
+- **Powershell as Admin in Windows**: Opens a Powershell session as Administrator inside your Windows VM (with UAC prompt).
+
+You can find and launch these from your desktop environment's application menu, or search for them by name.
