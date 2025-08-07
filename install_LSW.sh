@@ -125,17 +125,24 @@ echo "  - Start the VM"
 echo "  - Go to View -> Seamless Mode"
 echo "  - Or press Host+L to toggle seamless mode"
 
+# Disable Nested Paging for seamless mode compatibility
+sudo -u "$CURRENT_USER" VBoxManage modifyvm "w11" --nestedpaging off
+
 # Add disable_taskbar.cmd to Windows startup
 echo ""
 echo "Adding taskbar disable script to Windows startup..."
 if [ -f "disable_taskbar.cmd" ]; then
-    # Copy the script to Windows startup folder
-    sudo -u "$CURRENT_USER" VBoxManage --nologo guestcontrol "w11" run --username admin --password "$(cat vm_password.txt | tr -d '\n\r')" \
-    --wait-stdout --exe "C:\Windows\System32\cmd.exe" -- "/c copy \"Z:\\home\\user\\Documents\\Projects\\Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux\\disable_taskbar.cmd\" \"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\""
+    # Copy the script to Windows startup folder for the admin user (use full file path as destination)
+    sudo -u "$CURRENT_USER" VBoxManage --nologo guestcontrol "w11" copyto "$(pwd)/disable_taskbar.cmd" --username admin --password "$(cat vm_password.txt | tr -d '\n\r')" "C:/Users/admin/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/disable_taskbar.cmd" --verbose
     echo "Taskbar disable script added to Windows startup folder."
 else
     echo "Warning: disable_taskbar.cmd not found. Please add it manually to Windows startup."
 fi
+
+# Set Windows desktop background to pure black (single color)
+echo "Setting Windows desktop background to pure black..."
+sudo -u "$CURRENT_USER" VBoxManage --nologo guestcontrol "w11" run --username admin --password "$(cat vm_password.txt | tr -d '\n\r')" --exe "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -- "-NoProfile" "-Command" "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(\"user32.dll\",SetLastError=true)] public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); }'; $null = [Wallpaper]::SystemParametersInfo(20, 0, \"\", 3); Set-ItemProperty -Path 'HKCU:Control Panel\\Colors' -Name Background -Value '0 0 0'; RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters"
+echo "Windows desktop background set to black."
 
 echo ""
 echo "=== Installation completed successfully! ==="

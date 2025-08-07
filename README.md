@@ -1,3 +1,5 @@
+If seamless mode does not work: Turn off Nested Paging in the System tab and restart the guest.
+
 # Run any Windows App seamlessly on Linux! Just click on the File and choose "open with Windows" or "Always open with Windows"!
 
 ### Windows Subsystem for Linux (WSL) BUT the other way around. Just like the name would suggest...
