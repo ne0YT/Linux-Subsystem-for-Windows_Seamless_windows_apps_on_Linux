@@ -42,7 +42,6 @@ chmod +x /usr/bin/windows.sh
 # Set icon paths to use only icons/ subfolder
 WINDOWS_ICON="$(pwd)/icons/windows.png"
 POWERSHELL_ICON="$(pwd)/icons/powershell.png"
-POWERSHELL_ADMIN_ICON="$(pwd)/icons/powershell-admin.png"
 
 # Create Windows launcher
 cat > /usr/share/applications/Windows.desktop <<EOF
@@ -95,8 +94,8 @@ Version=1.0
 Type=Application
 Name=Powershell as Admin in Windows
 Comment=Open Powershell as Administrator in Windows VM
-Exec=wmctrl -xa Windows || /usr/bin/windows.sh /usr/bin/powershell-as-admin.cmd
-Icon=$POWERSHELL_ADMIN_ICON
+Exec=wmctrl -xa Windows || /usr/bin/windows.sh powershell-as-admin.cmd
+Icon=$POWERSHELL_ICON
 Path=
 Terminal=false
 StartupNotify=false
