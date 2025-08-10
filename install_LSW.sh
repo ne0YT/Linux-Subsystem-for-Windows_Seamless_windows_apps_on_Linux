@@ -70,9 +70,11 @@ chmod +x /usr/bin/umountRoot.sh
 \cp ./UmountRoot.desktop /usr/share/applications/
 chmod +x /usr/share/applications/UmountRoot.desktop
 
-# Copy powershell-as-admin.cmd to /usr/bin/
+# Copy PowerShell helper scripts
 \cp ./powershell-as-admin.cmd /usr/bin/
 chmod +x /usr/bin/powershell-as-admin.cmd
+\cp ./powershell.cmd /usr/bin/
+chmod +x /usr/bin/powershell.cmd
 
 # Create Powershell in Windows launcher
 cat > /usr/share/applications/PowershellInWindows.desktop <<EOF
@@ -81,7 +83,7 @@ Version=1.0
 Type=Application
 Name=Powershell in Windows
 Comment=Open Powershell in Windows VM
-Exec=wmctrl -xa Windows || /usr/bin/windows.sh powershell.exe
+Exec=wmctrl -xa Windows || /usr/bin/windows.sh "$SCRIPT_DIR/powershell.cmd"
 Icon=$POWERSHELL_ICON
 Path=
 Terminal=false
@@ -97,7 +99,7 @@ Version=1.0
 Type=Application
 Name=Powershell as Admin in Windows
 Comment=Open Powershell as Administrator in Windows VM
-Exec=wmctrl -xa Windows || /usr/bin/windows.sh $SCRIPT_DIR/powershell-as-admin.cmd
+Exec=wmctrl -xa Windows || /usr/bin/windows.sh "$SCRIPT_DIR/powershell-as-admin.cmd"
 Icon=$POWERSHELL_ICON
 Path=
 Terminal=false
