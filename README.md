@@ -1,4 +1,4 @@
-If seamless mode does not work: Turn off Nested Paging in the System tab and restart the guest.
+Tip: Ensure VirtualBox Guest Additions are installed in the VM and nested paging is enabled.
 
 # Run any Windows App seamlessly on Linux! Just click on the File and choose "open with Windows" or "Always open with Windows"!
 
@@ -36,9 +36,7 @@ Windows 11 VM on Virtualbox with the name "w11" and a user "admin" with a passwo
 Create a file named `vm_password.txt` in the project directory with your VM password on a single line. This file is excluded from version control for security (see `.gitignore`).
 
 **VM Configuration:**
-The VM needs to have guest-tools installed. The shared folder will be automatically configured during installation, creating the "Z:" drive in Windows automatically.
-
-**Note:** If the VM is running during installation, a transient shared folder will be created (temporary). For a permanent shared folder, shut down the VM before running the installation script.
+Install VirtualBox Guest Additions in the VM. Shared folder and UI prefs are applied by a separate step after base install (see Setup).
 
 If you are worried about permanently mounting the root of the host Linux system in Windows in read/write mode because of security reasons, you can pause root folder mounting later (see **umountRoot** section for details).
 
@@ -50,23 +48,39 @@ Press Win+R and then type: ```shell:startup```
     - In Windows 11 VM go to Control Panel -> Power Options -> System settings -> When I press the power button -> Choose "Shut down".
     - Reboot (for applying VBox setting).
 
-**Setup:**
+**Setup (simple):**
 
-Just run this in a terminal:
+1) Clone and enter the project
 ```
 git clone https://github.com/ne0YT/Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux
 cd Linux-Subsystem-for-Windows_Seamless_windows_apps_on_Linux/
-sudo bash ./install_LSW.sh
 ```
 
-The installation script will automatically:
-- Install required dependencies (VirtualBox, wmctrl)
-- Configure the shared folder for your VM
-- Set up VM auto-shutdown behavior
-- Check for password file
-- Install desktop applications
+2) Create the password file (your Windows `admin` user password)
+```
+echo "YOUR_WINDOWS_ADMIN_PASSWORD" > vm_password.txt
+```
+
+3) Base install (safe; no VM changes)
+```
+sudo ./install_LSW.sh
+```
+This installs required packages, desktop launchers, and `windows.sh`.
+
+4) Configure VirtualBox integration (shared folder Z:, seamless UI, taskbar script)
+```
+sudo ./configure_virtualbox.sh
+```
+Notes:
+- VM must be named `w11` and have a user `admin` with the password from `vm_password.txt`.
+- Requires Guest Additions and the guest control service running in Windows.
+
+What the scripts do:
+- `install_LSW.sh`: installs files/launchers only; no VM config.
+- `configure_virtualbox.sh`: sets permanent `ROOT` shared folder (Z:), GUI prefs (Seamless, mini toolbar, default close action), copies `disable_taskbar.cmd` to Startup and tries to run it once.
 
 **VM Auto-Start:** The system automatically starts the VM when you open a file, whether it's powered off or in a saved state.
+Additionally, whenever the VM is already running, `windows.sh` ensures a transient `ROOT` shared folder exists so drive `Z:` is available even after reboots.
 
 **Testing:** Always use `./windows.sh README.md` to test the system. The script runs in ~0.3 seconds and exits immediately.
 

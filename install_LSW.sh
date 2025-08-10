@@ -39,9 +39,12 @@ ln -s "$(pwd)/windows.sh" /usr/bin/windows.sh
 chmod +x /usr/bin/windows.sh
 # Always create a fresh Windows.desktop with correct Exec line
 # Use new icons for launchers
+# Get the actual script directory (where the files are located)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Set icon paths to use only icons/ subfolder
-WINDOWS_ICON="$(pwd)/icons/windows.png"
-POWERSHELL_ICON="$(pwd)/icons/powershell.png"
+WINDOWS_ICON="$SCRIPT_DIR/icons/windows.png"
+POWERSHELL_ICON="$SCRIPT_DIR/icons/powershell.png"
 
 # Create Windows launcher
 cat > /usr/share/applications/Windows.desktop <<EOF
@@ -94,7 +97,7 @@ Version=1.0
 Type=Application
 Name=Powershell as Admin in Windows
 Comment=Open Powershell as Administrator in Windows VM
-Exec=wmctrl -xa Windows || /usr/bin/windows.sh powershell-as-admin.cmd
+Exec=wmctrl -xa Windows || /usr/bin/windows.sh $SCRIPT_DIR/powershell-as-admin.cmd
 Icon=$POWERSHELL_ICON
 Path=
 Terminal=false
@@ -119,72 +122,9 @@ else
     echo "Password file found."
 fi
 
-# Configure shared folder for VM
 echo ""
-echo "Configuring shared folder for VM 'w11'..."
-# Get the current user who is running sudo
-CURRENT_USER=${SUDO_USER:-$USER}
-
-if sudo -u "$CURRENT_USER" VBoxManage showvminfo "w11" >/dev/null 2>&1; then
-    # Remove existing shared folder if it exists
-    sudo -u "$CURRENT_USER" VBoxManage sharedfolder remove "w11" --name "ROOT" >/dev/null 2>&1
-    
-    # Check if VM is running
-    if sudo -u "$CURRENT_USER" VBoxManage showvminfo "w11" | grep -q "running"; then
-        echo "VM 'w11' is running. Adding transient shared folder..."
-        sudo -u "$CURRENT_USER" VBoxManage sharedfolder add "w11" --name "ROOT" --hostpath "/" --automount --transient
-        echo "Transient shared folder 'ROOT' configured successfully for running VM 'w11'"
-        echo "Note: This shared folder will be lost when the VM is restarted"
-        echo "For permanent shared folder, shut down the VM and run the installation again"
-    else
-        # Add permanent shared folder
-        sudo -u "$CURRENT_USER" VBoxManage sharedfolder add "w11" --name "ROOT" --hostpath "/" --automount
-        echo "Permanent shared folder 'ROOT' configured successfully for VM 'w11'"
-    fi
-    echo "This will create the 'Z:' drive in Windows automatically"
-else
-    echo "Warning: VM 'w11' not found. Please create the VM first or update the VM name in the scripts."
-    echo "You can manually configure the shared folder later using:"
-    echo "VBoxManage sharedfolder add 'w11' --name 'ROOT' --hostpath '/' --automount"
-fi
-
-# Configure VM auto-shutdown behavior
-echo ""
-echo "Configuring VM auto-shutdown behavior..."
-sudo -u "$CURRENT_USER" VBoxManage setextradata 'w11' GUI/DefaultCloseAction Shutdown
-echo "VM will now automatically shut down when you close the window."
-
-# Configure seamless mode settings
-echo ""
-echo "Configuring seamless mode settings..."
-sudo -u "$CURRENT_USER" VBoxManage setextradata 'w11' GUI/Seamless on
-sudo -u "$CURRENT_USER" VBoxManage setextradata 'w11' GUI/ShowMiniToolBar on
-sudo -u "$CURRENT_USER" VBoxManage setextradata 'w11' GUI/Seamless on
-sudo -u "$CURRENT_USER" VBoxManage setextradata 'w11' GUI/ShowMiniToolBar on
-echo "Seamless mode will be enabled when VM starts."
-echo "Note: You may need to manually enable seamless mode in VirtualBox GUI:"
-echo "  - Start the VM"
-echo "  - Go to View -> Seamless Mode"
-echo "  - Or press Host+L to toggle seamless mode"
-
-# Disable Nested Paging for seamless mode compatibility
-sudo -u "$CURRENT_USER" VBoxManage modifyvm "w11" --nestedpaging off
-
-# Add disable_taskbar.cmd to Windows startup
-echo ""
-echo "Adding taskbar disable script to Windows startup..."
-if [ -f "disable_taskbar.cmd" ]; then
-    # Copy the script to Windows startup folder for the admin user (use full file path as destination)
-    sudo -u "$CURRENT_USER" VBoxManage --nologo guestcontrol "w11" copyto "$(pwd)/disable_taskbar.cmd" --username admin --password "$(cat vm_password.txt | tr -d '\n\r')" "C:/Users/admin/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/disable_taskbar.cmd" --verbose
-    echo "Taskbar disable script added to Windows startup folder."
-else
-    echo "Warning: disable_taskbar.cmd not found. Please add it manually to Windows startup."
-fi
-
-# Set Windows desktop background to pure black (single color)
-echo "Setting Windows desktop background to pure black..."
-sudo -u "$CURRENT_USER" VBoxManage --nologo guestcontrol "w11" run --username admin --password "$(cat vm_password.txt | tr -d '\n\r')" --exe "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -- "-NoProfile" "-Command" "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(\"user32.dll\",SetLastError=true)] public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); }'; $null = [Wallpaper]::SystemParametersInfo(20, 0, \"\", 3); Set-ItemProperty -Path 'HKCU:Control Panel\\Colors' -Name Background -Value '0 0 0'; RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters"
-echo "Windows desktop background set to black."
+echo "Skipping VirtualBox VM configuration in base install."
+echo "Run ./configure_virtualbox.sh to set up VM integration (shared folder, seamless mode, taskbar)."
 
 echo ""
 echo "=== Installation completed successfully! ==="

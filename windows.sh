@@ -17,8 +17,13 @@ fi
 VM_PASSWORD=$(cat "$PASSWORD_FILE" | tr -d '\n\r')
 
 # Quick VM start if not running (non-blocking)
-if ! vboxmanage showvminfo "w11" | grep -q "running"; then
-    vboxmanage startvm "w11" --type separate > /dev/null 2>&1 &
+if ! VBoxManage showvminfo "w11" | grep -q "running"; then
+    VBoxManage startvm "w11" --type separate > /dev/null 2>&1 &
+fi
+
+# Ensure transient shared folder ROOT exists when VM is running (creates Z:)
+if VBoxManage showvminfo "w11" | grep -q "running"; then
+    VBoxManage sharedfolder add "w11" --name "ROOT" --hostpath "/" --automount --transient > /dev/null 2>&1 || true
 fi
 
 # Convert path and open file immediately (forward slashes for Windows)
